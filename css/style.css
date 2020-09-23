@@ -76,7 +76,7 @@ strong {
     color: var(--clr-dark);
     text-decoration: none;
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: var(--fw-bold);
@@ -84,7 +84,7 @@ strong {
 }
 
 .btn:hover {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 /* Typography */
@@ -457,48 +457,19 @@ header {
     transform: scale(1.2);
     opacity: 0.5;
 }
-/* footer */
 
-.footer {
-    background: #111;
-    color: var(--clr-accent);
-    text-align: center;
-    padding: 2.5em 0;
-    font-size: var(--fs-h3);
-}
-
-.footer a {
-    color: inherit;
-    text-decoration: none;
-}
-
-.footer__link {
-    font-weight: var(--fw-bold);
-}
-
-.footer__link:hover,
-.social-list__link:hover {
-    opacity: 0.7;
-}
-
-.footer__link:hover {
-    text-decoration: underline;
-}
-
-.social-list {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin: 2em 0 0;
-    padding: 0;
-}
-
-.social-list__item {
-    margin: 0 0.5em;
-}
-
-.social-list__link {
-    padding: 0.5em;
+hr {
+    border: 0;
+    height: 0.4vw;
+    width: 100%;
+    position: relative;
+    background: linear-gradient(to right,
+        var(--clr-light),
+        var(--clr-accent),
+        var(--clr-dark));
+    margin: 4% auto;
+    z-index: -10;
+    opacity: 0.5;
 }
 
 /* Projects */
@@ -524,9 +495,7 @@ header {
     margin-bottom: 5%;
     height: auto;
     object-fit: cover;
-    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:20px;'><text y='50%'>🖱️</text></svg>")
-            16 0,
-        auto;
+    cursor: pointer;
 }
 
 .project-description > p {
@@ -567,21 +536,26 @@ header {
 
 .slide-img > button:hover {
     background: var(--clr-accent);
-    color: #1a0903;
+    cursor: pointer;
 }
 
-/**/
+.slide-img > button > svg:hover {
+    stroke: black;
+}
+
+/*contacts*/
 #contacts {
     border-width: 0;
     position: relative;
     bottom: 0;
+    margin: 0 auto;
 }
 
 #contacts > h2 {
+    width: 50%;
     text-align: center;
     text-indent: 0;
-    margin-top: 2%;
-    margin-bottom: 5%;
+    margin: 2% 25% 5% 25%;
     font-size: 2.5vw;
 }
 
@@ -589,7 +563,7 @@ header {
     display: flex;
     text-indent: 0;
     align-content: center;
-    justify-content: center;
+    justify-content: space-around;
     width: 100%;
     margin: 0 auto;
 }
@@ -597,10 +571,10 @@ header {
 .social-media > li {
     display: inline-block;
     vertical-align: middle;
-    width: 20%;
+    width: 15%;
 }
 
-svg:hover {
+li > svg:hover {
     stroke: var(--clr-accent);
 }
 
@@ -618,9 +592,23 @@ svg:hover {
     animation-fill-mode: both;
 }
 @media only screen and (max-width: 768px) {
-    #contacts > h2 {
-        font-size: 3.5vw;
+    #contacts > h2, .project-description > h2 > a {
+        font-size: 4.5vw;
         margin-bottom: 1.5%;
+    }
+
+    .project-description > p {
+        font-size: 3vw;
+    }
+
+    .social-media > li {
+        width: 25%;
+    }
+
+    .portfolio__item {
+        width: 50%;
+        height: auto;
+        margin: 0 auto;
     }
 }
 
@@ -632,12 +620,184 @@ svg:hover {
 
 
 /*footer*/
+@keyframes swing {
+    15% {
+    transform: translateX(5px);
+    }
+    30% {
+    transform: translateX(-5px);
+    }
+    50% {
+    transform: translateX(3px);
+    }
+    65% {
+    transform: translateX(-3px);
+    }
+    80% {
+    transform: translateX(2px);
+    }
+    100% {
+    transform: translateX(0);
+    }
+}
 
 .email {
     font-size: 2vw;
     text-align: center;
+    margin: 2%;
+    padding: 0.5%;
 }
 
 .email:hover {
-    stroke: #16e0bd;
+    animation: swing 1s ease;
+    animation-iteration-count: 1;
+}
+
+.email > a {
+    color: var(--clr-dark);
+    transition: color 0.25s ease-in;
+}
+
+.email > a:hover {
+    color: var(--clr-accent);
+}
+
+/*certificate popups*/
+.trigger{
+	font-size: 2em;
+	text-transform: uppercase;
+	margin-top: 10%;
+	display: block;
+}
+
+.popup__img > img{
+    margin: 0 auto;
+	color: var(--clr-accent);
+}
+
+/* Start popup css */
+
+@keyframes bg {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes inner {
+    0% {transform: scale(0.8);}
+    50% {transform: scale(1.06);}
+	100% {transform: scale(1);}
+}
+
+@-webkit-keyframes bg {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes inner {
+    0% {transform: scale(0.8);}
+    50% {transform: scale(1.06);}
+	100% {transform: scale(1);}
+}
+
+.popup__check {
+	display: none;
+}
+
+.popup__base, .popup__bg{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+    cursor: zoom-out;
+    z-index: 100;
+}
+
+.popup__base {
+	background-color: rgba(0,0,0,0.5);
+	display: none;
+}
+
+.popup__check:checked + .popup__base {
+	display: block;
+	animation-name: bg;
+    animation-duration: .5s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: bg;
+    -webkit-animation-duration: .5s;
+	-webkit-animation-fill-mode: forwards;
+}
+
+.popup__inner {
+	position: absolute;
+	z-index: 100;
+	width: 60%;
+	height: auto;
+	background-color: #fff;
+    top: 20%;
+    padding: 1.5%;
+	left: 20%;
+	display: block;
+    cursor: default;
+}
+
+.popup__check:checked + .popup__base .popup__inner{
+	animation-name: inner;
+    animation-duration: .5s;
+	animation-fill-mode: forwards;
+	-webkit-animation-name: inner;
+    -webkit-animation-duration: .5s;
+	-webkit-animation-fill-mode: forwards;
+}
+
+.popup__img {
+	width: 95%;
+    height: auto;
+    max-height: 100%;
+	padding-left: 7%;
+	padding-right: 2.5%;
+    overflow: auto;
+    z-index: 2;
+}
+
+.popup__calign {
+	float: right;
+	padding-right: 60px;
+	font-size: 50px;
+}
+
+.popup__close {
+    transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+	display: block;
+	position: absolute;
+	z-index: 10;
+    text-align: right;
+    margin-left: 1%;
+    cursor: pointer;
+    transition: transform 0.25s ease-in;
+	color: var(--clr-accent);
+}
+
+.popup__close:hover {
+    transform: scale(2) rotate(45deg);
+}
+
+.trigger > h2 {
+    font-size: 1.5rem;
+    text-transform: none;
+    transition: border-bottom 0.25s ease-in-out;
+}
+
+.trigger > h2:hover {
+    border-bottom: 0.5rem solid var(--clr-accent);
+    width: 80%;
+    margin: 0 auto;
+    cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:20px;'><text y='50%'>🖱️</text></svg>")
+            16 0,
+        auto; 
 }
