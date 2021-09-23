@@ -62,5 +62,5 @@ github.addEventListener("click", function () {
 });
 
 codepen.addEventListener("click", function () {
-    window.open("https://codepen.io/joshtrivedi/#");
+    window.open("https://www.linkedin.com/in/josh-trivedi/");
 });
