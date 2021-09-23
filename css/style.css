@@ -421,7 +421,7 @@ header {
 
 .portfolio__img:hover,
 .portfolio__item:focus .portfolio__img {
-    transform: scale(1.2);
+    transform: scale(1);
     opacity: 0.5;
 }
 
