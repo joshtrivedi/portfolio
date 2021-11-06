@@ -442,6 +442,7 @@ header {
 .badge {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    
 }
 
 .badge_item {
@@ -454,7 +455,8 @@ header {
     transition: transform 750ms cubic-bezier(0.5, 0, 0.5, 1), opacity 250ms linear;
     width: 200px;
     height: 200px;
-    
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .badge_item:focus {
