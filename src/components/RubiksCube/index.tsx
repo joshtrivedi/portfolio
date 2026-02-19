@@ -1,211 +1,149 @@
 'use client';
 
-import { useRef, useState, useCallback, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Text } from '@react-three/drei';
+import { useRef, useState, useCallback } from 'react';
+import { Canvas, useFrame, ThreeEvent } from '@react-three/fiber';
+import { Html } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Face config: index maps to Three.js BoxGeometry face order
 // BoxGeometry face order: +X, -X, +Y, -Y, +Z, -Z
-const FACE_CONFIG = [
-  { dir: '+x', color: '#2563eb', label: 'Skills',      section: 'skills' },      // Right  – Blue
-  { dir: '-x', color: '#16a34a', label: 'Projects',    section: 'projects' },    // Left   – Green
-  { dir: '+y', color: '#f1f5f9', label: 'About',       section: 'about' },       // Top    – White
-  { dir: '-y', color: '#ca8a04', label: 'Experience',  section: 'experience' },  // Bottom – Yellow
-  { dir: '+z', color: '#dc2626', label: 'Home',        section: 'home' },        // Front  – Red
-  { dir: '-z', color: '#ea580c', label: 'Contact',     section: 'contact' },     // Back   – Orange
+const FACES = [
+  { color: '#2563eb', label: '',      section: 'skills' },
+  { color: '#16a34a', label: '',    section: 'projects' },
+  { color: '#f1f5f9', label: '',       section: 'about' },
+  { color: '#ca8a04', label: '',  section: 'experience' },
+  { color: '#dc2626', label: '',        section: 'home' },
+  { color: '#ea580c', label: '',     section: 'contact' },
 ];
 
-// Returns material colors for a cubie at grid position (x, y, z)
-function getCubieMaterials(gx: number, gy: number, gz: number): THREE.MeshStandardMaterial[] {
-  const inner = '#111827';
-  return [
-    new THREE.MeshStandardMaterial({ color: gx === 1  ? FACE_CONFIG[0].color : inner, roughness: 0.15, metalness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: gx === -1 ? FACE_CONFIG[1].color : inner, roughness: 0.15, metalness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: gy === 1  ? FACE_CONFIG[2].color : inner, roughness: 0.15, metalness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: gy === -1 ? FACE_CONFIG[3].color : inner, roughness: 0.15, metalness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: gz === 1  ? FACE_CONFIG[4].color : inner, roughness: 0.15, metalness: 0.1 }),
-    new THREE.MeshStandardMaterial({ color: gz === -1 ? FACE_CONFIG[5].color : inner, roughness: 0.15, metalness: 0.1 }),
-  ];
-}
+const INNER = '#111827';
+const GAP = 1.02;
+const SIZE = 0.94;
 
-// Face label positions and orientations for the outer face centers
-const FACE_LABELS = [
-  { position: [1.55, 0, 0]  as [number,number,number], rotation: [0, Math.PI / 2, 0]  as [number,number,number], label: 'Skills',     color: '#fff' },
-  { position: [-1.55, 0, 0] as [number,number,number], rotation: [0, -Math.PI / 2, 0] as [number,number,number], label: 'Projects',   color: '#fff' },
-  { position: [0, 1.55, 0]  as [number,number,number], rotation: [-Math.PI / 2, 0, 0] as [number,number,number], label: 'About',      color: '#111' },
-  { position: [0, -1.55, 0] as [number,number,number], rotation: [Math.PI / 2, 0, 0]  as [number,number,number], label: 'Experience', color: '#111' },
-  { position: [0, 0, 1.55]  as [number,number,number], rotation: [0, 0, 0]             as [number,number,number], label: 'Home',       color: '#fff' },
-  { position: [0, 0, -1.55] as [number,number,number], rotation: [0, Math.PI, 0]       as [number,number,number], label: 'Contact',    color: '#fff' },
-];
-
-interface CubeProps {
-  onFaceClick: (section: string) => void;
-  hoveredFace: string | null;
-  setHoveredFace: (face: string | null) => void;
-}
-
-function RubiksCubeGroup({ onFaceClick, hoveredFace, setHoveredFace }: CubeProps) {
-  const groupRef = useRef<THREE.Group>(null);
-  const isDragging = useRef(false);
-  const mouseStart = useRef({ x: 0, y: 0 });
-  const mouseMoved = useRef(false);
-  const rotationVelocity = useRef({ x: 0, y: 0 });
-  const { gl } = useThree();
-
-  // Build 27 cubies
-  const cubies = [];
-  for (let x = -1; x <= 1; x++) {
-    for (let y = -1; y <= 1; y++) {
-      for (let z = -1; z <= 1; z++) {
-        cubies.push({ x, y, z, materials: getCubieMaterials(x, y, z) });
-      }
+const CUBIES: { pos: [number, number, number]; colors: string[] }[] = [];
+for (let x = -1; x <= 1; x++) {
+  for (let y = -1; y <= 1; y++) {
+    for (let z = -1; z <= 1; z++) {
+      CUBIES.push({
+        pos: [x * GAP, y * GAP, z * GAP],
+        colors: [
+          x === 1  ? FACES[0].color : INNER,
+          x === -1 ? FACES[1].color : INNER,
+          y === 1  ? FACES[2].color : INNER,
+          y === -1 ? FACES[3].color : INNER,
+          z === 1  ? FACES[4].color : INNER,
+          z === -1 ? FACES[5].color : INNER,
+        ],
+      });
     }
   }
+}
 
-  const gap = 1.02;
-  const size = 0.94;
+const LABELS = [
+  { pos: [1.65, 0, 0]  as [number,number,number], label: 'Skills',     dark: false },
+  { pos: [-1.65, 0, 0] as [number,number,number], label: 'Projects',   dark: false },
+  { pos: [0, 1.65, 0]  as [number,number,number], label: 'About',      dark: true  },
+  { pos: [0, -1.65, 0] as [number,number,number], label: 'Experience', dark: true  },
+  { pos: [0, 0, 1.65]  as [number,number,number], label: 'Home',       dark: false },
+  { pos: [0, 0, -1.65] as [number,number,number], label: 'Contact',    dark: false },
+];
 
-  // Detect which outer face was clicked via raycasting
-  const handlePointerUp = useCallback(
-    (e: THREE.Event) => {
-      if (mouseMoved.current) return;
-      const event = e as unknown as { point: THREE.Vector3; face: THREE.Face | null; object: THREE.Mesh };
-      if (!event.face || !groupRef.current) return;
+function resolveFace(face: THREE.Face, object: THREE.Object3D): string {
+  const n = face.normal.clone().transformDirection(object.matrixWorld);
+  const ax = Math.abs(n.x), ay = Math.abs(n.y), az = Math.abs(n.z);
+  if (ax >= ay && ax >= az) return n.x > 0 ? 'skills'     : 'projects';
+  if (ay >= ax && ay >= az) return n.y > 0 ? 'about'      : 'experience';
+  return n.z > 0                            ? 'home'       : 'contact';
+}
 
-      const normal = event.face.normal.clone();
-      normal.transformDirection(event.object.matrixWorld);
+interface SceneProps {
+  onNavigate: (section: string) => void;
+  hoveredFace: string | null;
+  setHoveredFace: (f: string | null) => void;
+}
 
-      const absX = Math.abs(normal.x);
-      const absY = Math.abs(normal.y);
-      const absZ = Math.abs(normal.z);
+function Scene({ onNavigate, hoveredFace, setHoveredFace }: SceneProps) {
+  const groupRef = useRef<THREE.Group>(null);
+  const dragging = useRef(false);
+  const moved = useRef(false);
+  const last = useRef({ x: 0, y: 0 });
 
-      let section = '';
-      if (absX >= absY && absX >= absZ) section = normal.x > 0 ? 'skills' : 'projects';
-      else if (absY >= absX && absY >= absZ) section = normal.y > 0 ? 'about' : 'experience';
-      else section = normal.z > 0 ? 'home' : 'contact';
-
-      onFaceClick(section);
-    },
-    [onFaceClick]
+  const mats = useRef(
+    CUBIES.map((c) =>
+      c.colors.map((col) => new THREE.MeshStandardMaterial({ color: col, roughness: 0.2, metalness: 0.05 }))
+    )
   );
-
-  // Hover detection
-  const handlePointerMove = useCallback(
-    (e: THREE.Event) => {
-      const event = e as unknown as { face: THREE.Face | null; object: THREE.Mesh };
-      if (!event.face) { setHoveredFace(null); return; }
-      const normal = event.face.normal.clone();
-      normal.transformDirection(event.object.matrixWorld);
-      const absX = Math.abs(normal.x);
-      const absY = Math.abs(normal.y);
-      const absZ = Math.abs(normal.z);
-      let face = '';
-      if (absX >= absY && absX >= absZ) face = normal.x > 0 ? 'skills' : 'projects';
-      else if (absY >= absX && absY >= absZ) face = normal.y > 0 ? 'about' : 'experience';
-      else face = normal.z > 0 ? 'home' : 'contact';
-      setHoveredFace(face);
-    },
-    [setHoveredFace]
-  );
-
-  // Mouse drag handlers on the canvas element
-  useEffect(() => {
-    const canvas = gl.domElement;
-    const onMouseDown = (e: MouseEvent) => {
-      isDragging.current = true;
-      mouseMoved.current = false;
-      mouseStart.current = { x: e.clientX, y: e.clientY };
-      rotationVelocity.current = { x: 0, y: 0 };
-    };
-    const onMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current || !groupRef.current) return;
-      const dx = e.clientX - mouseStart.current.x;
-      const dy = e.clientY - mouseStart.current.y;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) mouseMoved.current = true;
-      rotationVelocity.current = { x: dy * 0.008, y: dx * 0.008 };
-      groupRef.current.rotation.y += dx * 0.008;
-      groupRef.current.rotation.x += dy * 0.008;
-      mouseStart.current = { x: e.clientX, y: e.clientY };
-    };
-    const onMouseUp = () => { isDragging.current = false; };
-
-    // Touch
-    const onTouchStart = (e: TouchEvent) => {
-      isDragging.current = true;
-      mouseMoved.current = false;
-      mouseStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    };
-    const onTouchMove = (e: TouchEvent) => {
-      if (!isDragging.current || !groupRef.current) return;
-      const dx = e.touches[0].clientX - mouseStart.current.x;
-      const dy = e.touches[0].clientY - mouseStart.current.y;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) mouseMoved.current = true;
-      groupRef.current.rotation.y += dx * 0.008;
-      groupRef.current.rotation.x += dy * 0.008;
-      mouseStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-    };
-    const onTouchEnd = () => { isDragging.current = false; };
-
-    canvas.addEventListener('mousedown', onMouseDown);
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', onMouseUp);
-    canvas.addEventListener('touchstart', onTouchStart);
-    canvas.addEventListener('touchmove', onTouchMove);
-    canvas.addEventListener('touchend', onTouchEnd);
-    return () => {
-      canvas.removeEventListener('mousedown', onMouseDown);
-      window.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('mouseup', onMouseUp);
-      canvas.removeEventListener('touchstart', onTouchStart);
-      canvas.removeEventListener('touchmove', onTouchMove);
-      canvas.removeEventListener('touchend', onTouchEnd);
-    };
-  }, [gl]);
 
   useFrame(() => {
-    if (!groupRef.current) return;
-    if (!isDragging.current) {
-      // Auto-rotate when idle
-      groupRef.current.rotation.y += 0.003;
-      groupRef.current.rotation.x += 0.001;
-      // Decay velocity
-      rotationVelocity.current.x *= 0.95;
-      rotationVelocity.current.y *= 0.95;
-    }
+    if (!groupRef.current || dragging.current) return;
+    groupRef.current.rotation.y += 0.004;
+    groupRef.current.rotation.x += 0.0015;
   });
 
+  const onPointerDown = useCallback((e: ThreeEvent<PointerEvent>) => {
+    e.stopPropagation();
+    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+    dragging.current = true;
+    moved.current = false;
+    last.current = { x: e.clientX, y: e.clientY };
+  }, []);
+
+  const onPointerMove = useCallback((e: ThreeEvent<PointerEvent>) => {
+    if (!groupRef.current) return;
+    if (dragging.current) {
+      const dx = e.clientX - last.current.x;
+      const dy = e.clientY - last.current.y;
+      if (Math.abs(dx) > 2 || Math.abs(dy) > 2) moved.current = true;
+      groupRef.current.rotation.y += dx * 0.009;
+      groupRef.current.rotation.x += dy * 0.009;
+      last.current = { x: e.clientX, y: e.clientY };
+    } else if (e.face) {
+      setHoveredFace(resolveFace(e.face, e.object));
+    }
+  }, [setHoveredFace]);
+
+  const onPointerUp = useCallback((e: ThreeEvent<PointerEvent>) => {
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+    if (!moved.current && e.face) onNavigate(resolveFace(e.face, e.object));
+    dragging.current = false;
+  }, [onNavigate]);
+
+  const onPointerOut = useCallback(() => {
+    if (!dragging.current) setHoveredFace(null);
+  }, [setHoveredFace]);
+
   return (
-    <group ref={groupRef}>
-      {cubies.map(({ x, y, z, materials }) => (
-        <mesh
-          key={`${x}-${y}-${z}`}
-          position={[x * gap, y * gap, z * gap]}
-          material={materials}
-          onPointerUp={handlePointerUp}
-          onPointerMove={handlePointerMove}
-          onPointerOut={() => setHoveredFace(null)}
-        >
-          <boxGeometry args={[size, size, size]} />
+    <group
+      ref={groupRef}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerOut={onPointerOut}
+    >
+      {CUBIES.map((cubie, i) => (
+        <mesh key={i} position={cubie.pos} material={mats.current[i]}>
+          <boxGeometry args={[SIZE, SIZE, SIZE]} />
         </mesh>
       ))}
 
-      {/* Face labels on outer face centers */}
-      {FACE_LABELS.map((faceLabel) => (
-        <Text
-          key={faceLabel.label}
-          position={faceLabel.position}
-          rotation={faceLabel.rotation}
-          fontSize={0.18}
-          color={hoveredFace === faceLabel.label.toLowerCase() ? '#ffd700' : faceLabel.color}
-          anchorX="center"
-          anchorY="middle"
-          font="/fonts/Inter-Bold.woff"
-          outlineWidth={0.01}
-          outlineColor="#00000040"
-        >
-          {faceLabel.label}
-        </Text>
+      {LABELS.map((lbl) => (
+        <Html key={lbl.label} position={lbl.pos} center occlude={false}>
+          <div
+            style={{
+              padding: '1px 5px',
+              fontSize: 10,
+              fontWeight: 700,
+              letterSpacing: '0.04em',
+              color: hoveredFace === lbl.label.toLowerCase() ? '#ffd700' : (lbl.dark ? '#111' : '#fff'),
+              pointerEvents: 'none',
+              userSelect: 'none',
+              textShadow: lbl.dark ? 'none' : '0 1px 3px rgba(0,0,0,0.6)',
+              whiteSpace: 'nowrap',
+              fontFamily: 'system-ui, sans-serif',
+            }}
+          >
+            {lbl.label}
+          </div>
+        </Html>
       ))}
     </group>
   );
@@ -217,23 +155,12 @@ interface RubiksCubeProps {
 
 export default function RubiksCube({ onNavigate }: RubiksCubeProps) {
   const [hoveredFace, setHoveredFace] = useState<string | null>(null);
-  const [tooltip, setTooltip] = useState<string | null>(null);
 
-  const handleFaceClick = useCallback(
-    (section: string) => {
-      if (onNavigate) {
-        onNavigate(section);
-      } else {
-        const el = document.getElementById(section);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }
-    },
-    [onNavigate]
-  );
-
-  useEffect(() => {
-    setTooltip(hoveredFace ? `Go to ${FACE_LABELS.find(f => f.label.toLowerCase() === hoveredFace)?.label ?? hoveredFace}` : null);
-  }, [hoveredFace]);
+  const handleNavigate = useCallback((section: string) => {
+    if (onNavigate) { onNavigate(section); return; }
+    const el = document.getElementById(section);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, [onNavigate]);
 
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
@@ -242,56 +169,30 @@ export default function RubiksCube({ onNavigate }: RubiksCubeProps) {
         style={{ cursor: hoveredFace ? 'pointer' : 'grab' }}
         gl={{ antialias: true, alpha: true }}
       >
-        <ambientLight intensity={0.6} />
-        <pointLight position={[5, 5, 5]} intensity={1.2} />
-        <pointLight position={[-5, -3, -5]} intensity={0.4} color="#8b5cf6" />
-        <pointLight position={[0, 5, -5]} intensity={0.3} color="#3b82f6" />
+        <ambientLight intensity={0.7} />
+        <pointLight position={[5, 5, 5]} intensity={1.5} />
+        <pointLight position={[-4, -3, -5]} intensity={0.5} color="#8b5cf6" />
+        <pointLight position={[0, 6, -4]} intensity={0.4} color="#3b82f6" />
 
-        <RubiksCubeGroup
-          onFaceClick={handleFaceClick}
+        <Scene
+          onNavigate={handleNavigate}
           hoveredFace={hoveredFace}
           setHoveredFace={setHoveredFace}
         />
       </Canvas>
 
-      {/* Tooltip */}
-      {tooltip && (
-        <div
-          style={{
-            position: 'absolute',
-            bottom: 16,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            background: 'rgba(10, 22, 40, 0.95)',
-            border: '1px solid #1a2744',
-            borderRadius: 8,
-            padding: '0.4rem 1rem',
-            fontSize: '0.8rem',
-            color: '#94a3b8',
-            pointerEvents: 'none',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {tooltip}
-        </div>
-      )}
-
-      {/* Hint */}
-      <div
-        className="cube-hint"
-        style={{
-          position: 'absolute',
-          top: 12,
-          left: '50%',
-          transform: 'translateX(-50%)',
-          fontSize: '0.7rem',
-          color: '#475569',
-          whiteSpace: 'nowrap',
-          letterSpacing: '0.05em',
-          pointerEvents: 'none',
-        }}
-      >
-        drag to rotate • click a face to navigate
+      <div style={{
+        position: 'absolute',
+        bottom: 8,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        fontSize: '0.68rem',
+        color: '#475569',
+        pointerEvents: 'none',
+        whiteSpace: 'nowrap',
+        letterSpacing: '0.04em',
+      }}>
+        drag · click a face to navigate
       </div>
     </div>
   );
