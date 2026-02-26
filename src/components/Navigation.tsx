@@ -43,10 +43,10 @@ export default function Navigation() {
         zIndex: 100,
         transition: 'all 0.3s ease',
         background: scrolled
-          ? 'rgba(5, 10, 20, 0.95)'
+          ? 'rgba(8, 8, 8, 0.95)'
           : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #1a2744' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid #1e1e1e' : '1px solid transparent',
       }}
     >
       <div
@@ -65,7 +65,7 @@ export default function Navigation() {
           }}
         >
           <span className="gradient-text">JT</span>
-          <span style={{ color: '#475569', marginLeft: 6 }}>/ dev</span>
+          <span style={{ color: 'var(--text-muted)', marginLeft: 6 }}>/ dev</span>
         </a>
 
         {/* Desktop nav */}
@@ -83,8 +83,8 @@ export default function Navigation() {
                   fontSize: '0.875rem',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  color: isActive ? '#3b82f6' : '#94a3b8',
-                  background: isActive ? 'rgba(59,130,246,0.1)' : 'transparent',
+                  color: isActive ? '#16e0bd' : '#94a3b8',
+                  background: isActive ? 'rgba(22,224,189,0.08)' : 'transparent',
                   transition: 'all 0.2s ease',
                 }}
               >
@@ -103,8 +103,8 @@ export default function Navigation() {
             borderRadius: 8,
             fontSize: '0.85rem',
             fontWeight: 600,
-            color: '#e2e8f0',
-            background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+            color: '#080808',
+            background: 'linear-gradient(135deg, #16e0bd, #0fa08a)',
             textDecoration: 'none',
             transition: 'opacity 0.2s ease',
           }}
@@ -141,8 +141,8 @@ export default function Navigation() {
       {menuOpen && (
         <div
           style={{
-            background: 'rgba(5, 10, 20, 0.98)',
-            borderTop: '1px solid #1a2744',
+            background: 'rgba(8, 8, 8, 0.98)',
+            borderTop: '1px solid #1e1e1e',
             padding: '1rem 1.5rem 1.5rem',
           }}
         >
@@ -158,7 +158,7 @@ export default function Navigation() {
                 textDecoration: 'none',
                 fontSize: '0.95rem',
                 fontWeight: 500,
-                borderBottom: '1px solid #1a2744',
+                borderBottom: '1px solid #1e1e1e',
               }}
             >
               {link.label}
