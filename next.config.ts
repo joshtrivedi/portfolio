@@ -1,10 +1,11 @@
 import type { NextConfig } from 'next';
-import path from 'path';
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: path.resolve(__dirname),
-  },
+  output: 'export',
+  basePath: '/portfolio',
+  assetPrefix: '/portfolio',
+  images: { unoptimized: true },
+  turbopack: {},
 };
 
 export default nextConfig;
