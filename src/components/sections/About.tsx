@@ -15,14 +15,14 @@ export default function About() {
           transform: 'translateX(-50%)',
           width: 200,
           height: 1,
-          background: 'linear-gradient(90deg, transparent, #3b82f6, transparent)',
+          background: 'linear-gradient(90deg, transparent, #16e0bd, transparent)',
         }}
       />
 
       <div className="section-container">
         {/* Heading */}
         <div style={{ marginBottom: '3rem' }}>
-          <p style={{ color: '#3b82f6', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             WHO I AM
           </p>
           <h2 className="section-heading gradient-text" style={{ maxWidth: 480 }}>
@@ -67,7 +67,7 @@ export default function About() {
                     }}
                   >
                     <p style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.88rem' }}>{edu.degree}</p>
-                    <p style={{ color: '#3b82f6', fontSize: '0.8rem', marginTop: 2 }}>{edu.institution}</p>
+                    <p style={{ color: 'var(--accent)', fontSize: '0.8rem', marginTop: 2 }}>{edu.institution}</p>
                     <p style={{ color: '#475569', fontSize: '0.75rem', marginTop: 2 }}>
                       {edu.period} · {edu.location}
                     </p>
@@ -85,7 +85,7 @@ export default function About() {
                 position: 'relative',
                 borderRadius: 16,
                 overflow: 'hidden',
-                border: '1px solid #1a2744',
+                border: '1px solid var(--border)',
                 aspectRatio: '4/3',
               }}
             >
@@ -100,7 +100,7 @@ export default function About() {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(to bottom, transparent 60%, rgba(5,10,20,0.7) 100%)',
+                  background: 'linear-gradient(to bottom, transparent 60%, rgba(8,8,8,0.7) 100%)',
                 }}
               />
               <div
