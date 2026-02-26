@@ -27,7 +27,7 @@ export const profile = {
   skills: [
     {
       category: 'AI / ML',
-      color: '#8b5cf6',
+      color: '#16e0bd',
       items: [
         'Generative Models (GANs, Diffusion, NeRF)',
         'LLMs & Agentic AI',
@@ -41,7 +41,7 @@ export const profile = {
     },
     {
       category: 'Full-Stack',
-      color: '#3b82f6',
+      color: '#0fa08a',
       items: [
         'React / Next.js',
         'TypeScript',
@@ -54,7 +54,7 @@ export const profile = {
     },
     {
       category: 'Mobile',
-      color: '#22d3ee',
+      color: '#5eead4',
       items: [
         'Android (Kotlin)',
         'iOS (Swift)',
@@ -64,7 +64,7 @@ export const profile = {
     },
     {
       category: 'Cloud & DevOps',
-      color: '#f59e0b',
+      color: '#2dd4bf',
       items: [
         'AWS',
         'Google Cloud Platform',
@@ -76,7 +76,7 @@ export const profile = {
     },
     {
       category: 'Data & Analytics',
-      color: '#10b981',
+      color: '#14b8a6',
       items: [
         'Python',
         'Apache Spark',
@@ -90,7 +90,7 @@ export const profile = {
     },
     {
       category: 'Languages',
-      color: '#f43f5e',
+      color: '#99f6e4',
       items: [
         'Python',
         'TypeScript / JavaScript',
