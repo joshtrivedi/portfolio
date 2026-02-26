@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { profile } from '@/data/profile';
+import { imgPath } from '@/lib/imgPath';
 
 export default function About() {
   return (
@@ -90,7 +91,7 @@ export default function About() {
               }}
             >
               <Image
-                src="/img/josh-pfp.jpg"
+                src={imgPath('/img/josh-pfp.jpg')}
                 alt="Josh Trivedi"
                 fill
                 style={{ objectFit: 'cover' }}
