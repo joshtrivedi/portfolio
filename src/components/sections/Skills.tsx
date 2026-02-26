@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { profile } from '@/data/profile';
+import { imgPath } from '@/lib/imgPath';
 
 export default function Skills() {
   return (
@@ -112,7 +113,7 @@ export default function Skills() {
                 }}
               >
                 <Image
-                  src={src}
+                  src={imgPath(src)}
                   alt={`Badge ${i + 1}`}
                   width={56}
                   height={56}
