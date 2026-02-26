@@ -13,7 +13,7 @@ const contactLinks = [
         <path d="M22 4L12 13 2 4" />
       </svg>
     ),
-    color: '#3b82f6',
+    color: '#16e0bd',
   },
   {
     label: 'LinkedIn',
@@ -25,7 +25,7 @@ const contactLinks = [
         <circle cx="4" cy="4" r="2" />
       </svg>
     ),
-    color: '#0ea5e9',
+    color: '#5eead4',
   },
   {
     label: 'GitHub',
@@ -36,7 +36,7 @@ const contactLinks = [
         <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
       </svg>
     ),
-    color: '#e2e8f0',
+    color: '#a0a0a0',
   },
   {
     label: 'Phone',
@@ -47,7 +47,7 @@ const contactLinks = [
         <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
       </svg>
     ),
-    color: '#10b981',
+    color: '#2dd4bf',
   },
 ];
 
@@ -58,7 +58,7 @@ export default function Contact() {
       style={{
         padding: '6rem 0',
         position: 'relative',
-        background: 'linear-gradient(180deg, transparent, rgba(59,130,246,0.04))',
+        background: 'linear-gradient(180deg, transparent, rgba(22,224,189,0.03))',
       }}
     >
       <div
@@ -69,13 +69,13 @@ export default function Contact() {
           transform: 'translateX(-50%)',
           width: 200,
           height: 1,
-          background: 'linear-gradient(90deg, transparent, #22d3ee, transparent)',
+          background: 'linear-gradient(90deg, transparent, #16e0bd, transparent)',
         }}
       />
 
       <div className="section-container">
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-          <p style={{ color: '#22d3ee', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             GET IN TOUCH
           </p>
           <h2 className="section-heading gradient-text" style={{ marginBottom: '1rem' }}>
@@ -155,10 +155,10 @@ export default function Contact() {
               borderRadius: 12,
               fontWeight: 700,
               fontSize: '1rem',
-              color: '#fff',
-              background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)',
+              color: '#080808',
+              background: 'linear-gradient(135deg, #16e0bd, #0fa08a)',
               textDecoration: 'none',
-              boxShadow: '0 8px 32px rgba(59,130,246,0.3)',
+              boxShadow: '0 8px 32px rgba(22,224,189,0.25)',
               transition: 'opacity 0.2s',
             }}
           >
