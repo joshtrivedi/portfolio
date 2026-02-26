@@ -11,7 +11,7 @@ export default function Certifications() {
     <section id="certifications" style={{ padding: '6rem 0', position: 'relative' }}>
       <div className="section-container">
         <div style={{ marginBottom: '3rem' }}>
-          <p style={{ color: '#22d3ee', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             CONTINUOUS LEARNING
           </p>
           <h2 className="section-heading gradient-text">Certifications</h2>
@@ -30,19 +30,19 @@ export default function Certifications() {
               onClick={() => setSelected(i === selected ? null : i)}
               style={{
                 background: 'var(--bg-card)',
-                border: `1px solid ${selected === i ? 'rgba(59,130,246,0.5)' : 'var(--border)'}`,
+                border: `1px solid ${selected === i ? 'rgba(22,224,189,0.4)' : 'var(--border)'}`,
                 borderRadius: 12,
                 padding: '1rem',
                 textAlign: 'left',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
-                boxShadow: selected === i ? '0 0 20px rgba(59,130,246,0.15)' : 'none',
+                boxShadow: selected === i ? 'var(--glow)' : 'none',
               }}
             >
               <p style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.85rem', lineHeight: 1.4, marginBottom: 4 }}>
                 {cert.name}
               </p>
-              <p style={{ color: '#3b82f6', fontSize: '0.75rem', fontWeight: 500 }}>{cert.issuer}</p>
+              <p style={{ color: 'var(--accent)', fontSize: '0.75rem', fontWeight: 500 }}>{cert.issuer}</p>
             </button>
           ))}
         </div>
@@ -55,7 +55,7 @@ export default function Certifications() {
               position: 'fixed',
               inset: 0,
               zIndex: 200,
-              background: 'rgba(5,10,20,0.92)',
+              background: 'rgba(8,8,8,0.92)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -69,8 +69,8 @@ export default function Certifications() {
                 position: 'relative',
                 maxWidth: 700,
                 width: '100%',
-                background: '#0a1628',
-                border: '1px solid #1a2744',
+                background: '#111111',
+                border: '1px solid var(--border)',
                 borderRadius: 16,
                 overflow: 'hidden',
               }}
@@ -110,7 +110,7 @@ export default function Certifications() {
 
               <div style={{ padding: '1rem 1.25rem' }}>
                 <p style={{ color: '#e2e8f0', fontWeight: 700 }}>{profile.certifications[selected].name}</p>
-                <p style={{ color: '#3b82f6', fontSize: '0.85rem' }}>{profile.certifications[selected].issuer}</p>
+                <p style={{ color: 'var(--accent)', fontSize: '0.85rem' }}>{profile.certifications[selected].issuer}</p>
               </div>
             </div>
           </div>
