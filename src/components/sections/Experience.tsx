@@ -13,14 +13,14 @@ export default function Experience() {
           transform: 'translateX(-50%)',
           width: 200,
           height: 1,
-          background: 'linear-gradient(90deg, transparent, #8b5cf6, transparent)',
+          background: 'linear-gradient(90deg, transparent, #16e0bd, transparent)',
         }}
       />
 
       <div className="section-container">
         {/* Heading */}
         <div style={{ marginBottom: '3rem' }}>
-          <p style={{ color: '#f59e0b', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             CAREER JOURNEY
           </p>
           <h2 className="section-heading gradient-text">Experience</h2>
@@ -36,7 +36,7 @@ export default function Experience() {
               top: 0,
               bottom: 0,
               width: 2,
-              background: 'linear-gradient(to bottom, #3b82f6, #8b5cf6 60%, transparent)',
+              background: 'linear-gradient(to bottom, #16e0bd, #0fa08a 60%, transparent)',
             }}
           />
 
@@ -53,10 +53,10 @@ export default function Experience() {
                     height: 14,
                     borderRadius: '50%',
                     background: exp.current
-                      ? 'linear-gradient(135deg, #3b82f6, #8b5cf6)'
-                      : '#1a2744',
-                    border: `2px solid ${exp.current ? '#3b82f6' : '#1a2744'}`,
-                    boxShadow: exp.current ? '0 0 12px rgba(59,130,246,0.5)' : 'none',
+                      ? 'linear-gradient(135deg, #16e0bd, #0fa08a)'
+                      : '#1e1e1e',
+                    border: `2px solid ${exp.current ? '#16e0bd' : '#1e1e1e'}`,
+                    boxShadow: exp.current ? '0 0 12px rgba(22,224,189,0.5)' : 'none',
                   }}
                 />
 
@@ -102,7 +102,7 @@ export default function Experience() {
                           </span>
                         )}
                       </div>
-                      <p style={{ color: '#3b82f6', fontWeight: 600, fontSize: '0.9rem', marginTop: 2 }}>
+                      <p style={{ color: 'var(--accent)', fontWeight: 600, fontSize: '0.9rem', marginTop: 2 }}>
                         {exp.company}
                       </p>
                     </div>
@@ -131,7 +131,7 @@ export default function Experience() {
                           marginBottom: '0.3rem',
                         }}
                       >
-                        <span style={{ color: '#3b82f6', marginTop: 4, flexShrink: 0 }}>›</span>
+                        <span style={{ color: 'var(--accent)', marginTop: 4, flexShrink: 0 }}>›</span>
                         {point}
                       </li>
                     ))}
