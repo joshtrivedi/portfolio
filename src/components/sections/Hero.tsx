@@ -14,7 +14,7 @@ const RubiksCube = dynamic(() => import('@/components/RubiksCube'), {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#1a2744',
+        color: '#555',
         fontSize: '0.85rem',
       }}
     >
@@ -159,7 +159,7 @@ export default function Hero() {
             }}
           >
             Co-Founder & CTO at{' '}
-            <span style={{ color: '#3b82f6', fontWeight: 600 }}>Predeeption</span> — building
+            <span style={{ color: '#16e0bd', fontWeight: 600 }}>Predeeption</span> — building
             agentic AI systems, diffusion models, and production-grade full-stack applications
             backed by{' '}
             <span style={{ color: '#94a3b8', fontWeight: 500 }}>Inria</span> &{' '}
