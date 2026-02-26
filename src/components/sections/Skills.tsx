@@ -10,13 +10,13 @@ export default function Skills() {
       style={{
         padding: '6rem 0',
         position: 'relative',
-        background: 'linear-gradient(180deg, transparent, rgba(59,130,246,0.03) 50%, transparent)',
+        background: 'linear-gradient(180deg, transparent, rgba(22,224,189,0.03) 50%, transparent)',
       }}
     >
       <div className="section-container">
         {/* Heading */}
         <div style={{ marginBottom: '3rem' }}>
-          <p style={{ color: '#8b5cf6', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             TECHNICAL EXPERTISE
           </p>
           <h2 className="section-heading gradient-text">
@@ -105,7 +105,7 @@ export default function Skills() {
                   height: 64,
                   borderRadius: 8,
                   overflow: 'hidden',
-                  border: '1px solid #1a2744',
+                  border: '1px solid var(--border)',
                   padding: 4,
                   background: 'var(--bg-card)',
                   transition: 'transform 0.2s',
