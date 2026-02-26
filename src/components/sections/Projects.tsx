@@ -10,13 +10,13 @@ export default function Projects() {
       style={{
         padding: '6rem 0',
         position: 'relative',
-        background: 'linear-gradient(180deg, transparent, rgba(139,92,246,0.03) 50%, transparent)',
+        background: 'linear-gradient(180deg, transparent, rgba(22,224,189,0.03) 50%, transparent)',
       }}
     >
       <div className="section-container">
         {/* Heading */}
         <div style={{ marginBottom: '3rem' }}>
-          <p style={{ color: '#10b981', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
+          <p style={{ color: 'var(--accent)', fontSize: '0.8rem', fontWeight: 700, letterSpacing: '0.15em', marginBottom: 8 }}>
             WHAT I&apos;VE BUILT
           </p>
           <h2 className="section-heading gradient-text">Projects</h2>
@@ -48,7 +48,7 @@ export default function Projects() {
                 style={{
                   height: 180,
                   position: 'relative',
-                  background: 'linear-gradient(135deg, #0a1628, #111827)',
+                  background: 'linear-gradient(135deg, #0a0a0a, #111111)',
                   overflow: 'hidden',
                 }}
               >
@@ -86,7 +86,7 @@ export default function Projects() {
                   style={{
                     position: 'absolute',
                     inset: 0,
-                    background: 'linear-gradient(to bottom, transparent 40%, rgba(10,22,40,0.9) 100%)',
+                    background: 'linear-gradient(to bottom, transparent 40%, rgba(8,8,8,0.9) 100%)',
                   }}
                 />
 
