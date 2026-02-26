@@ -23,10 +23,13 @@ const RubiksCube = dynamic(() => import('@/components/RubiksCube'), {
   ),
 });
 
+const CubeModal = dynamic(() => import('@/components/RubiksCube/CubeModal'), { ssr: false });
+
 export default function Hero() {
   const [scrambleSignal, setScrambleSignal] = useState(0);
   const [solveSignal, setSolveSignal] = useState(0);
   const [cubeState, setCubeState] = useState<'idle' | 'animating'>('idle');
+  const [cubeModalOpen, setCubeModalOpen] = useState(false);
 
   return (
     <section
@@ -303,12 +306,39 @@ export default function Hero() {
             >
               Solve
             </button>
+            <button
+              onClick={() => setCubeModalOpen(true)}
+              title="Expand"
+              aria-label="Open fullscreen cube"
+              style={{
+                padding: '0.4rem 0.55rem',
+                borderRadius: 8,
+                background: 'transparent',
+                border: '1px solid #333',
+                color: '#a0a0a0',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s',
+                lineHeight: 1,
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round">
+                <polyline points="1,5 1,1 5,1" />
+                <polyline points="9,1 13,1 13,5" />
+                <polyline points="13,9 13,13 9,13" />
+                <polyline points="5,13 1,13 1,9" />
+              </svg>
+            </button>
             <span style={{ fontSize: '0.65rem', color: '#555', marginLeft: 4 }}>
               drag to rotate
             </span>
           </div>
         </div>
       </div>
+
+      {cubeModalOpen && <CubeModal onClose={() => setCubeModalOpen(false)} />}
 
       {/* Mobile: stack cube below text */}
       <style>{`
