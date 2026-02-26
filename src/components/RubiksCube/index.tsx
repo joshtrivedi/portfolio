@@ -21,7 +21,22 @@ const FACE_COLORS: Record<string, string> = {
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type Axis = 'x' | 'y' | 'z';
-interface Move { axis: Axis; layer: -1 | 0 | 1; dir: 1 | -1 }
+export interface Move { axis: Axis; layer: -1 | 0 | 1; dir: 1 | -1 }
+
+export const NAMED_MOVES: Record<string, Move> = {
+  'U':  { axis: 'y', layer:  1, dir:  1 },
+  "U'": { axis: 'y', layer:  1, dir: -1 },
+  'D':  { axis: 'y', layer: -1, dir: -1 },
+  "D'": { axis: 'y', layer: -1, dir:  1 },
+  'R':  { axis: 'x', layer:  1, dir:  1 },
+  "R'": { axis: 'x', layer:  1, dir: -1 },
+  'L':  { axis: 'x', layer: -1, dir: -1 },
+  "L'": { axis: 'x', layer: -1, dir:  1 },
+  'F':  { axis: 'z', layer:  1, dir:  1 },
+  "F'": { axis: 'z', layer:  1, dir: -1 },
+  'B':  { axis: 'z', layer: -1, dir: -1 },
+  "B'": { axis: 'z', layer: -1, dir:  1 },
+};
 interface CubieData {
   gridPos: [number, number, number];
   faceColors: string[];
@@ -91,10 +106,11 @@ function invertMove(m: Move): Move {
 interface SceneProps {
   scrambleSignal: number;
   solveSignal: number;
+  moveSignal?: { move: Move; id: number };
   onStateChange: (state: 'idle' | 'animating') => void;
 }
 
-function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
+function Scene({ scrambleSignal, solveSignal, moveSignal, onStateChange }: SceneProps) {
   const groupRef = useRef<THREE.Group>(null);
   const cubieData = useRef<CubieData[]>(buildInitialCubies());
 
@@ -138,6 +154,12 @@ function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
     moveQueue.current = [...moveQueue.current, ...inverse];
     solveSequence.current = [];
   }, [solveSignal]);
+
+  useEffect(() => {
+    if (!moveSignal || moveSignal.id === 0) return;
+    moveQueue.current = [...moveQueue.current, moveSignal.move];
+    solveSequence.current = [...solveSequence.current, moveSignal.move];
+  }, [moveSignal?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function syncMaterials() {
     cubieData.current.forEach((cd, i) => {
@@ -260,12 +282,14 @@ function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
 interface RubiksCubeProps {
   scrambleSignal?: number;
   solveSignal?: number;
+  moveSignal?: { move: Move; id: number };
   onStateChange?: (state: 'idle' | 'animating') => void;
 }
 
 export default function RubiksCube({
   scrambleSignal = 0,
   solveSignal = 0,
+  moveSignal,
   onStateChange = () => {},
 }: RubiksCubeProps) {
   return (
@@ -281,6 +305,7 @@ export default function RubiksCube({
       <Scene
         scrambleSignal={scrambleSignal}
         solveSignal={solveSignal}
+        moveSignal={moveSignal}
         onStateChange={onStateChange}
       />
     </Canvas>
