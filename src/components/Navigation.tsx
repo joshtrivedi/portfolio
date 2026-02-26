@@ -109,7 +109,7 @@ export default function Navigation() {
             transition: 'opacity 0.2s ease',
           }}
         >
-          Hire me
+          Ping Me!
         </a>
 
         {/* Mobile hamburger */}
