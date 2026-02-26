@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { profile } from '@/data/profile';
+import { imgPath } from '@/lib/imgPath';
 
 export default function Certifications() {
   const [selected, setSelected] = useState<number | null>(null);
@@ -101,7 +102,7 @@ export default function Certifications() {
 
               <div style={{ position: 'relative', aspectRatio: '4/3' }}>
                 <Image
-                  src={profile.certifications[selected].image}
+                  src={imgPath(profile.certifications[selected].image)}
                   alt={profile.certifications[selected].name}
                   fill
                   style={{ objectFit: 'contain' }}
