@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { profile } from '@/data/profile';
+import { imgPath } from '@/lib/imgPath';
 
 export default function Projects() {
   return (
@@ -54,7 +55,7 @@ export default function Projects() {
               >
                 {project.image ? (
                   <Image
-                    src={project.image}
+                    src={imgPath(project.image)}
                     alt={project.title}
                     fill
                     style={{ objectFit: 'cover', opacity: 0.85 }}
