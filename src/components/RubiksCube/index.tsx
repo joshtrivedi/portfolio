@@ -123,7 +123,6 @@ function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
   );
 
   const dragging = useRef(false);
-  const moved = useRef(false);
   const last = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
@@ -217,7 +216,6 @@ function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
     e.stopPropagation();
     (e.target as HTMLElement).setPointerCapture(e.pointerId);
     dragging.current = true;
-    moved.current = false;
     last.current = { x: e.clientX, y: e.clientY };
   };
 
@@ -225,15 +223,16 @@ function Scene({ scrambleSignal, solveSignal, onStateChange }: SceneProps) {
     if (!groupRef.current || !dragging.current) return;
     const dx = e.clientX - last.current.x;
     const dy = e.clientY - last.current.y;
-    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) moved.current = true;
     groupRef.current.rotation.y += dx * 0.009;
     groupRef.current.rotation.x += dy * 0.009;
     last.current = { x: e.clientX, y: e.clientY };
   };
 
   const onPointerUp = (e: ThreeEvent<PointerEvent>) => {
-    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
-    dragging.current = false;
+    if (dragging.current) {
+      (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+      dragging.current = false;
+    }
   };
 
   return (
