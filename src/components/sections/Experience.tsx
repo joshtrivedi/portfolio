@@ -93,9 +93,9 @@ export default function Experience() {
                               borderRadius: 9999,
                               fontSize: '0.65rem',
                               fontWeight: 700,
-                              color: '#10b981',
-                              background: 'rgba(16,185,129,0.1)',
-                              border: '1px solid rgba(16,185,129,0.3)',
+                              color: 'var(--accent)',
+                              background: 'var(--glow)',
+                              border: '1px solid rgba(22,224,189,0.3)',
                             }}
                           >
                             CURRENT
