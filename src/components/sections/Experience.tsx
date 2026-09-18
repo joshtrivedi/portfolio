@@ -108,7 +108,7 @@ export default function Experience() {
                     </div>
                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
                       <p style={{ color: '#475569', fontSize: '0.8rem', fontWeight: 500 }}>
-                        {exp.startDate} — {exp.endDate}
+                        {exp.startDate} to {exp.endDate}
                       </p>
                       <p style={{ color: '#475569', fontSize: '0.75rem', marginTop: 2 }}>
                         {exp.location}

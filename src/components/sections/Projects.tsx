@@ -22,7 +22,7 @@ export default function Projects() {
           </p>
           <h2 className="section-heading gradient-text">Projects</h2>
           <p style={{ color: '#475569', fontSize: '0.9rem', marginTop: 8 }}>
-            From AI research to production apps — a selection of work across domains.
+            From AI research to production apps: a selection of work across domains.
           </p>
         </div>
 

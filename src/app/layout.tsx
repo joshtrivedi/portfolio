@@ -5,21 +5,21 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Josh Trivedi — AI Engineer & CTO',
+  title: 'Josh Trivedi, CTO & Co-Founder',
   description:
-    'Co-Founder & CTO at Predeeption. AI Engineer & Full-Stack Developer building agentic AI systems, generative models, and scalable full-stack applications.',
+    'CTO & Co-Founder at Predeeption, building production LLM systems with Augmented RAG for EV battery analytics. Open to AI Engineer, ML Engineer, and Research Engineer roles.',
   keywords: [
     'Josh Trivedi',
     'AI Engineer',
-    'Full-Stack Developer',
+    'ML Engineer',
     'CTO',
     'Predeeption',
     'Machine Learning',
-    'Generative AI',
+    'LLM',
   ],
   openGraph: {
-    title: 'Josh Trivedi — AI Engineer & CTO',
-    description: 'Building agentic AI systems and production-grade full-stack applications.',
+    title: 'Josh Trivedi, CTO & Co-Founder',
+    description: 'Building production LLM systems with Augmented RAG for EV battery analytics.',
     type: 'website',
   },
 };
