@@ -15,7 +15,7 @@ const RubiksCube = dynamic(() => import('./index'), {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: '#555',
+        color: 'var(--text-muted)',
         fontSize: '0.85rem',
       }}
     >
@@ -95,8 +95,8 @@ export default function CubeModal({ onClose }: CubeModalProps) {
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: '#111111',
-          border: '1px solid #1e1e1e',
+          background: 'var(--bg-card)',
+          border: '1px solid var(--border)',
           borderRadius: 20,
           width: '100%',
           maxWidth: 860,
@@ -104,7 +104,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
           display: 'flex',
           flexDirection: 'column',
           overflow: 'hidden',
-          boxShadow: '0 0 60px rgba(22,224,189,0.08)',
+          boxShadow: '0 0 60px rgba(var(--accent-rgb),0.08)',
         }}
       >
         {/* Header */}
@@ -114,11 +114,11 @@ export default function CubeModal({ onClose }: CubeModalProps) {
             alignItems: 'center',
             justifyContent: 'space-between',
             padding: '0.9rem 1.25rem',
-            borderBottom: '1px solid #1e1e1e',
+            borderBottom: '1px solid var(--border)',
             flexShrink: 0,
           }}
         >
-          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: '#16e0bd', letterSpacing: '0.1em' }}>
+          <span style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--accent)', letterSpacing: '0.1em' }}>
             INTERACTIVE SOLVE
           </span>
           <button
@@ -160,7 +160,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
             style={{
               width: 210,
               flexShrink: 0,
-              borderLeft: '1px solid #1e1e1e',
+              borderLeft: '1px solid var(--border)',
               display: 'flex',
               flexDirection: 'column',
               gap: '1rem',
@@ -170,7 +170,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
           >
             {/* Scramble / Solve */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              <p style={{ fontSize: '0.62rem', fontWeight: 700, color: '#555', letterSpacing: '0.12em', marginBottom: 2 }}>
+              <p style={{ fontSize: '0.62rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.12em', marginBottom: 2 }}>
                 CONTROLS
               </p>
               <button
@@ -182,9 +182,9 @@ export default function CubeModal({ onClose }: CubeModalProps) {
                   fontSize: '0.78rem',
                   fontWeight: 700,
                   letterSpacing: '0.04em',
-                  background: isDisabled ? '#1e1e1e' : 'rgba(22,224,189,0.1)',
-                  border: `1px solid ${isDisabled ? '#1e1e1e' : 'rgba(22,224,189,0.35)'}`,
-                  color: isDisabled ? '#555' : '#16e0bd',
+                  background: isDisabled ? 'var(--border)' : 'rgba(var(--accent-rgb),0.1)',
+                  border: `1px solid ${isDisabled ? 'var(--border)' : 'rgba(var(--accent-rgb),0.35)'}`,
+                  color: isDisabled ? 'var(--text-muted)' : 'var(--accent)',
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
                   transition: 'all 0.2s',
                 }}
@@ -201,8 +201,8 @@ export default function CubeModal({ onClose }: CubeModalProps) {
                   fontWeight: 700,
                   letterSpacing: '0.04em',
                   background: 'transparent',
-                  border: `1px solid ${isDisabled ? '#1e1e1e' : '#333'}`,
-                  color: isDisabled ? '#555' : '#a0a0a0',
+                  border: `1px solid ${isDisabled ? 'var(--border)' : 'var(--border)'}`,
+                  color: isDisabled ? 'var(--text-muted)' : 'var(--text-secondary)',
                   cursor: isDisabled ? 'not-allowed' : 'pointer',
                   transition: 'all 0.2s',
                 }}
@@ -213,7 +213,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
 
             {/* Move buttons */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-              <p style={{ fontSize: '0.62rem', fontWeight: 700, color: '#555', letterSpacing: '0.12em', marginBottom: 2 }}>
+              <p style={{ fontSize: '0.62rem', fontWeight: 700, color: 'var(--text-muted)', letterSpacing: '0.12em', marginBottom: 2 }}>
                 MOVES
               </p>
               {MOVE_PAIRS.map(([normal, prime]) => {
@@ -235,7 +235,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
                           letterSpacing: '0.02em',
                           background: isDisabled ? '#1a1a1a' : (isWhite ? 'rgba(248,248,248,0.12)' : `${color}22`),
                           border: `1px solid ${isDisabled ? '#222' : (isWhite ? 'rgba(248,248,248,0.3)' : `${color}66`)}`,
-                          color: isDisabled ? '#444' : (isWhite ? '#e2e8f0' : color),
+                          color: isDisabled ? '#444' : (isWhite ? 'var(--text-primary)' : color),
                           cursor: isDisabled ? 'not-allowed' : 'pointer',
                           transition: 'all 0.15s',
                         }}
@@ -269,7 +269,7 @@ export default function CubeModal({ onClose }: CubeModalProps) {
           .cube-modal-panel {
             width: 100% !important;
             border-left: none !important;
-            border-top: 1px solid #1e1e1e !important;
+            border-top: 1px solid var(--border) !important;
             max-height: 260px;
           }
         }

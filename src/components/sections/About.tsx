@@ -16,7 +16,7 @@ export default function About() {
           transform: 'translateX(-50%)',
           width: 200,
           height: 1,
-          background: 'linear-gradient(90deg, transparent, #16e0bd, transparent)',
+          background: 'linear-gradient(90deg, transparent, var(--accent), transparent)',
         }}
       />
 
@@ -41,19 +41,19 @@ export default function About() {
         >
           {/* Left: Bio */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <p style={{ color: '#94a3b8', fontSize: '1rem', lineHeight: 1.8, fontWeight: 500, fontStyle: 'italic' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.8, fontWeight: 500, fontStyle: 'italic' }}>
               &ldquo;{profile.tagline}&rdquo;
             </p>
 
             {profile.about.bio.map((para, i) => (
-              <p key={i} style={{ color: '#94a3b8', fontSize: '0.95rem', lineHeight: 1.85 }}>
+              <p key={i} style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.85 }}>
                 {para}
               </p>
             ))}
 
             {/* Education */}
             <div style={{ marginTop: '1rem' }}>
-              <p style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+              <p style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.95rem', marginBottom: '0.75rem' }}>
                 Education
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
@@ -67,9 +67,9 @@ export default function About() {
                       borderRadius: 10,
                     }}
                   >
-                    <p style={{ color: '#e2e8f0', fontWeight: 600, fontSize: '0.88rem' }}>{edu.degree}</p>
+                    <p style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.88rem' }}>{edu.degree}</p>
                     <p style={{ color: 'var(--accent)', fontSize: '0.8rem', marginTop: 2 }}>{edu.institution}</p>
-                    <p style={{ color: '#475569', fontSize: '0.75rem', marginTop: 2 }}>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: 2 }}>
                       {edu.period} · {edu.location}
                     </p>
                   </div>
@@ -112,8 +112,8 @@ export default function About() {
                   right: 16,
                 }}
               >
-                <p style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.9rem' }}>{profile.name}</p>
-                <p style={{ color: '#94a3b8', fontSize: '0.75rem' }}>{profile.location}</p>
+                <p style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.9rem' }}>{profile.name}</p>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.75rem' }}>{profile.location}</p>
               </div>
             </div>
 
@@ -133,7 +133,7 @@ export default function About() {
                   }}
                 >
                   <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{h.icon}</span>
-                  <p style={{ color: '#94a3b8', fontSize: '0.82rem', lineHeight: 1.5 }}>{h.text}</p>
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', lineHeight: 1.5 }}>{h.text}</p>
                 </div>
               ))}
             </div>

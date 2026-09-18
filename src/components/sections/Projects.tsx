@@ -11,7 +11,7 @@ export default function Projects() {
       style={{
         padding: '6rem 0',
         position: 'relative',
-        background: 'linear-gradient(180deg, transparent, rgba(22,224,189,0.03) 50%, transparent)',
+        background: 'linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.03) 50%, transparent)',
       }}
     >
       <div className="section-container">
@@ -21,7 +21,7 @@ export default function Projects() {
             WHAT I&apos;VE BUILT
           </p>
           <h2 className="section-heading gradient-text">Projects</h2>
-          <p style={{ color: '#475569', fontSize: '0.9rem', marginTop: 8 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: 8 }}>
             From AI research to production apps: a selection of work across domains.
           </p>
         </div>
@@ -49,7 +49,7 @@ export default function Projects() {
                 style={{
                   height: 180,
                   position: 'relative',
-                  background: 'linear-gradient(135deg, #0a0a0a, #111111)',
+                  background: 'linear-gradient(135deg, var(--bg-alt), var(--bg-card))',
                   overflow: 'hidden',
                 }}
               >
@@ -127,7 +127,7 @@ export default function Projects() {
                   style={{
                     fontSize: '1rem',
                     fontWeight: 700,
-                    color: '#e2e8f0',
+                    color: 'var(--text-primary)',
                     lineHeight: 1.3,
                   }}
                 >

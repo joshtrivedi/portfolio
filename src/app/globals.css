@@ -3,16 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary:    #080808;
-  --bg-card:       #111111;
-  --bg-card-hover: #181818;
-  --border:        #1e1e1e;
-  --text-primary:  #ffffff;
-  --text-secondary: #a0a0a0;
-  --text-muted:    #555555;
-  --accent:        #16e0bd;
-  --accent-dim:    #0fa08a;
-  --glow:          rgba(22, 224, 189, 0.12);
+  --bg-primary:     #12100c;
+  --bg-alt:         #17140f;
+  --bg-card:        #1b1712;
+  --bg-card-hover:  #221c14;
+  --border:         #2e2717;
+  --text-primary:   #f4ecdc;
+  --text-secondary: #b6a98e;
+  --text-muted:     #756a54;
+  --accent:         #ff6b35;
+  --accent-dim:     #ffb238;
+  --accent-rgb:     255, 107, 53;
+  --on-accent:      #14100a;
+  --glow:           rgba(255, 107, 53, 0.14);
+  --danger:         #e2472a;
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --bg-primary:     #faf5ea;
+  --bg-alt:         #f2ead9;
+  --bg-card:        #ffffff;
+  --bg-card-hover:  #fbf2df;
+  --border:         #e4d8bc;
+  --text-primary:   #241d10;
+  --text-secondary: #5c503b;
+  --text-muted:     #8c8067;
+  --accent:         #d9531f;
+  --accent-dim:     #b8781f;
+  --accent-rgb:     217, 83, 31;
+  --on-accent:      #fdf8ee;
+  --glow:           rgba(217, 83, 31, 0.10);
+  --danger:         #c23a22;
+  color-scheme: light;
 }
 
 * {
@@ -29,16 +52,17 @@ html {
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: system-ui, sans-serif;
+  font-family: var(--font-body), system-ui, sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--bg-primary); }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
-::selection { background: rgba(22, 224, 189, 0.25); color: var(--text-primary); }
+::selection { background: rgba(var(--accent-rgb), 0.25); color: var(--text-primary); }
 
 .grid-bg {
   background-image:
@@ -51,10 +75,10 @@ body {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
-  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, background-color 0.25s ease;
 }
 .card:hover {
-  border-color: rgba(22, 224, 189, 0.35);
+  border-color: rgba(var(--accent-rgb), 0.35);
   transform: translateY(-2px);
   box-shadow: 0 8px 32px var(--glow);
 }
@@ -67,13 +91,13 @@ body {
   font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.03em;
-  background: rgba(22, 224, 189, 0.08);
+  background: rgba(var(--accent-rgb), 0.08);
   color: var(--accent);
-  border: 1px solid rgba(22, 224, 189, 0.2);
+  border: 1px solid rgba(var(--accent-rgb), 0.2);
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, var(--accent), #ffffff);
+  background: linear-gradient(135deg, var(--accent), var(--accent-dim));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -102,7 +126,8 @@ body {
 
 .animate-float { animation: float 4s ease-in-out infinite; }
 .section-heading {
+  font-family: var(--font-display), serif;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }

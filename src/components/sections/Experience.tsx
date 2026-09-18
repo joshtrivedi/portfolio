@@ -13,7 +13,7 @@ export default function Experience() {
           transform: 'translateX(-50%)',
           width: 200,
           height: 1,
-          background: 'linear-gradient(90deg, transparent, #16e0bd, transparent)',
+          background: 'linear-gradient(90deg, transparent, var(--accent), transparent)',
         }}
       />
 
@@ -36,7 +36,7 @@ export default function Experience() {
               top: 0,
               bottom: 0,
               width: 2,
-              background: 'linear-gradient(to bottom, #16e0bd, #0fa08a 60%, transparent)',
+              background: 'linear-gradient(to bottom, var(--accent), var(--accent-dim) 60%, transparent)',
             }}
           />
 
@@ -53,10 +53,10 @@ export default function Experience() {
                     height: 14,
                     borderRadius: '50%',
                     background: exp.current
-                      ? 'linear-gradient(135deg, #16e0bd, #0fa08a)'
-                      : '#1e1e1e',
-                    border: `2px solid ${exp.current ? '#16e0bd' : '#1e1e1e'}`,
-                    boxShadow: exp.current ? '0 0 12px rgba(22,224,189,0.5)' : 'none',
+                      ? 'linear-gradient(135deg, var(--accent), var(--accent-dim))'
+                      : 'var(--border)',
+                    border: `2px solid ${exp.current ? 'var(--accent)' : 'var(--border)'}`,
+                    boxShadow: exp.current ? '0 0 12px rgba(var(--accent-rgb),0.5)' : 'none',
                   }}
                 />
 
@@ -81,7 +81,7 @@ export default function Experience() {
                           style={{
                             fontSize: '1.05rem',
                             fontWeight: 700,
-                            color: '#e2e8f0',
+                            color: 'var(--text-primary)',
                           }}
                         >
                           {exp.role}
@@ -95,7 +95,7 @@ export default function Experience() {
                               fontWeight: 700,
                               color: 'var(--accent)',
                               background: 'var(--glow)',
-                              border: '1px solid rgba(22,224,189,0.3)',
+                              border: '1px solid rgba(var(--accent-rgb),0.3)',
                             }}
                           >
                             CURRENT
@@ -107,10 +107,10 @@ export default function Experience() {
                       </p>
                     </div>
                     <div style={{ textAlign: 'right', flexShrink: 0 }}>
-                      <p style={{ color: '#475569', fontSize: '0.8rem', fontWeight: 500 }}>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 500 }}>
                         {exp.startDate} to {exp.endDate}
                       </p>
-                      <p style={{ color: '#475569', fontSize: '0.75rem', marginTop: 2 }}>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: 2 }}>
                         {exp.location}
                       </p>
                     </div>
@@ -122,7 +122,7 @@ export default function Experience() {
                       <li
                         key={j}
                         style={{
-                          color: '#94a3b8',
+                          color: 'var(--text-secondary)',
                           fontSize: '0.85rem',
                           lineHeight: 1.7,
                           display: 'flex',

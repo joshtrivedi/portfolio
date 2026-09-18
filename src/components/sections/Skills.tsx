@@ -11,7 +11,7 @@ export default function Skills() {
       style={{
         padding: '6rem 0',
         position: 'relative',
-        background: 'linear-gradient(180deg, transparent, rgba(22,224,189,0.03) 50%, transparent)',
+        background: 'linear-gradient(180deg, transparent, rgba(var(--accent-rgb),0.03) 50%, transparent)',
       }}
     >
       <div className="section-container">
@@ -23,7 +23,7 @@ export default function Skills() {
           <h2 className="section-heading gradient-text">
             Skills & Technologies
           </h2>
-          <p style={{ color: '#475569', fontSize: '0.9rem', marginTop: 8 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: 8 }}>
             Spanning AI research, full-stack engineering, mobile, and cloud.
           </p>
         </div>
@@ -58,7 +58,7 @@ export default function Skills() {
                   style={{
                     fontSize: '0.85rem',
                     fontWeight: 700,
-                    color: '#e2e8f0',
+                    color: 'var(--text-primary)',
                     letterSpacing: '0.05em',
                     textTransform: 'uppercase',
                   }}
@@ -77,7 +77,7 @@ export default function Skills() {
                       borderRadius: 9999,
                       fontSize: '0.78rem',
                       fontWeight: 500,
-                      color: '#94a3b8',
+                      color: 'var(--text-secondary)',
                       background: `${skillGroup.color}12`,
                       border: `1px solid ${skillGroup.color}30`,
                       transition: 'all 0.2s',
@@ -94,7 +94,7 @@ export default function Skills() {
 
         {/* Badges section */}
         <div style={{ marginTop: '3rem' }}>
-          <p style={{ color: '#475569', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '1rem' }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.1em', marginBottom: '1rem' }}>
             IBM / COURSERA BADGES
           </p>
           <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>

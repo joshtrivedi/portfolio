@@ -301,7 +301,7 @@ export default function RubiksCube({
       <ambientLight intensity={0.5} />
       <pointLight position={[6, 6, 6]} intensity={2.0} />
       <pointLight position={[-5, -4, -5]} intensity={0.4} color="#ffffff" />
-      <pointLight position={[0, 7, -4]} intensity={0.3} color="#16e0bd" />
+      <pointLight position={[0, 7, -4]} intensity={0.3} color="#ff6b35" />
       <Scene
         scrambleSignal={scrambleSignal}
         solveSignal={solveSignal}

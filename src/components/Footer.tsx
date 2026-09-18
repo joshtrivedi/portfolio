@@ -6,7 +6,7 @@ export default function Footer() {
       style={{
         padding: '2.5rem 0',
         borderTop: '1px solid var(--border)',
-        background: 'rgba(8, 8, 8, 0.6)',
+        background: 'var(--bg-alt)',
       }}
     >
       <div
@@ -20,15 +20,15 @@ export default function Footer() {
         }}
       >
         <div>
-          <p style={{ color: '#e2e8f0', fontWeight: 700, fontSize: '0.9rem' }}>
+          <p style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.9rem' }}>
             <span className="gradient-text">Josh Trivedi</span>
           </p>
-          <p style={{ color: '#475569', fontSize: '0.75rem', marginTop: 2 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem', marginTop: 2 }}>
             {profile.location}
           </p>
         </div>
 
-        <p style={{ color: '#475569', fontSize: '0.75rem' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.75rem' }}>
           Built with Next.js · TypeScript · Three.js
         </p>
 
@@ -37,7 +37,7 @@ export default function Footer() {
             href={profile.contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#475569', fontSize: '0.8rem', textDecoration: 'none' }}
+            style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'none' }}
           >
             GitHub
           </a>
@@ -45,13 +45,13 @@ export default function Footer() {
             href={profile.contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ color: '#475569', fontSize: '0.8rem', textDecoration: 'none' }}
+            style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'none' }}
           >
             LinkedIn
           </a>
           <a
             href={`mailto:${profile.contact.email}`}
-            style={{ color: '#475569', fontSize: '0.8rem', textDecoration: 'none' }}
+            style={{ color: 'var(--text-muted)', fontSize: '0.8rem', textDecoration: 'none' }}
           >
             Email
           </a>

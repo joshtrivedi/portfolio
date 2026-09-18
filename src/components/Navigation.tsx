@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
   { label: 'Home', href: '#home' },
@@ -42,11 +43,9 @@ export default function Navigation() {
         right: 0,
         zIndex: 100,
         transition: 'all 0.3s ease',
-        background: scrolled
-          ? 'rgba(8, 8, 8, 0.95)'
-          : 'transparent',
+        background: scrolled ? 'var(--bg-primary)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid #1e1e1e' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
       }}
     >
       <div
@@ -60,7 +59,7 @@ export default function Navigation() {
             fontSize: '1.1rem',
             fontWeight: 800,
             letterSpacing: '-0.02em',
-            color: '#e2e8f0',
+            color: 'var(--text-primary)',
             textDecoration: 'none',
           }}
         >
@@ -69,7 +68,7 @@ export default function Navigation() {
         </a>
 
         {/* Desktop nav */}
-        <nav style={{ display: 'flex', gap: '0.25rem' }} className="hidden md:flex">
+        <nav style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }} className="hidden md:flex">
           {navLinks.map((link) => {
             const id = link.href.replace('#', '');
             const isActive = active === id;
@@ -83,8 +82,8 @@ export default function Navigation() {
                   fontSize: '0.875rem',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  color: isActive ? '#16e0bd' : '#94a3b8',
-                  background: isActive ? 'rgba(22,224,189,0.08)' : 'transparent',
+                  color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
+                  background: isActive ? 'rgba(var(--accent-rgb), 0.08)' : 'transparent',
                   transition: 'all 0.2s ease',
                 }}
               >
@@ -94,37 +93,41 @@ export default function Navigation() {
           })}
         </nav>
 
-        {/* CTA */}
-        <a
-          href="mailto:josh.trivedi@gmail.com"
-          className="hidden md:inline-flex"
-          style={{
-            padding: '0.45rem 1.1rem',
-            borderRadius: 8,
-            fontSize: '0.85rem',
-            fontWeight: 600,
-            color: '#080808',
-            background: 'linear-gradient(135deg, #16e0bd, #0fa08a)',
-            textDecoration: 'none',
-            transition: 'opacity 0.2s ease',
-          }}
-        >
-          Ping Me!
-        </a>
+        {/* CTA + theme toggle */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <div className="hidden md:flex">
+            <ThemeToggle />
+          </div>
+          <a
+            href="mailto:josh.trivedi@gmail.com"
+            className="hidden md:inline-flex"
+            style={{
+              padding: '0.45rem 1.1rem',
+              borderRadius: 8,
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              color: 'var(--on-accent)',
+              background: 'linear-gradient(135deg, var(--accent), var(--accent-dim))',
+              textDecoration: 'none',
+              transition: 'opacity 0.2s ease',
+            }}
+          >
+            Ping Me!
+          </a>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMenuOpen((o) => !o)}
-          style={{
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            padding: '0.5rem',
-            color: '#e2e8f0',
-          }}
-          aria-label="Toggle menu"
-        >
+          {/* Mobile hamburger */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen((o) => !o)}
+            style={{
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              padding: '0.5rem',
+              color: 'var(--text-primary)',
+            }}
+            aria-label="Toggle menu"
+          >
           {menuOpen ? (
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M18 6L6 18M6 6l12 12" />
@@ -134,15 +137,16 @@ export default function Navigation() {
               <path d="M3 12h18M3 6h18M3 18h18" />
             </svg>
           )}
-        </button>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
         <div
           style={{
-            background: 'rgba(8, 8, 8, 0.98)',
-            borderTop: '1px solid #1e1e1e',
+            background: 'var(--bg-primary)',
+            borderTop: '1px solid var(--border)',
             padding: '1rem 1.5rem 1.5rem',
           }}
         >
@@ -154,16 +158,19 @@ export default function Navigation() {
               style={{
                 display: 'block',
                 padding: '0.75rem 0',
-                color: '#94a3b8',
+                color: 'var(--text-secondary)',
                 textDecoration: 'none',
                 fontSize: '0.95rem',
                 fontWeight: 500,
-                borderBottom: '1px solid #1e1e1e',
+                borderBottom: '1px solid var(--border)',
               }}
             >
               {link.label}
             </a>
           ))}
+          <div style={{ paddingTop: '1rem' }}>
+            <ThemeToggle />
+          </div>
         </div>
       )}
     </header>

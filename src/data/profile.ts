@@ -7,7 +7,15 @@ export const profile = {
   location: 'Amiens, Hauts-de-France, France',
   openToWork: {
     status: true,
-    roles: ['AI Engineer', 'ML Engineer', 'Research Engineer'],
+    roles: [
+      'AI Engineer',
+      'ML Engineer',
+      'Research Engineer',
+      'Data Engineer',
+      'MLOps Engineer',
+      'Full-Stack Engineer',
+      'Technical Lead',
+    ],
     locations: ['Netherlands', 'France'],
   },
   contact: {
@@ -20,7 +28,7 @@ export const profile = {
     bio: [
       'CTO and Co-Founder of Predeeption, a DeepTech startup in EV battery analytics, incubated by Inria Startup Studio with CNRS partnership. Building a production LLM system with Augmented RAG over heterogeneous scientific data.',
       'Passionate about productionizing research, whether that means distributed data pipelines on Kafka, Spark, and Databricks, or owning the full ML lifecycle from training through deployment and monitoring.',
-      'My contract at Predeeption is ending, and I am actively exploring AI Engineer, ML Engineer, and Research Engineer roles in the Netherlands and France.',
+      'My contract at Predeeption is ending, and I am actively exploring AI/ML, data, and technical leadership roles in the Netherlands and France.',
     ],
     highlights: [
       { icon: '🔋', text: 'Co-Founded Predeeption, incubated by Inria Startup Studio with CNRS partnership' },
@@ -32,7 +40,7 @@ export const profile = {
   skills: [
     {
       category: 'AI/ML',
-      color: '#16e0bd',
+      color: '#ff6b35',
       items: [
         'PyTorch',
         'TensorFlow',
@@ -50,7 +58,7 @@ export const profile = {
     },
     {
       category: 'MLOps/Data',
-      color: '#0fa08a',
+      color: '#e2472a',
       items: [
         'Kafka',
         'Spark',
@@ -66,7 +74,7 @@ export const profile = {
     },
     {
       category: 'Frontend',
-      color: '#5eead4',
+      color: '#ffb238',
       items: [
         'Next.js',
         'React',
@@ -80,17 +88,17 @@ export const profile = {
     },
     {
       category: 'Languages',
-      color: '#2dd4bf',
+      color: '#f2c078',
       items: ['Python', 'Java', 'TypeScript', 'JavaScript', 'Kotlin', 'C++', 'Swift'],
     },
     {
       category: 'Cloud/Tools',
-      color: '#14b8a6',
+      color: '#c1440e',
       items: ['AWS', 'GCP', 'Scaleway', 'Git'],
     },
     {
       category: 'Computer Vision',
-      color: '#99f6e4',
+      color: '#e8935a',
       items: ['OpenCV', 'MediaPipe', '3D reconstruction', 'segmentation', 'keypoint detection'],
     },
   ],
