@@ -101,12 +101,26 @@ export default function Certifications() {
               </button>
 
               <div style={{ position: 'relative', aspectRatio: '4/3' }}>
-                <Image
-                  src={imgPath(profile.certifications[selected].image)}
-                  alt={profile.certifications[selected].name}
-                  fill
-                  style={{ objectFit: 'contain' }}
-                />
+                {profile.certifications[selected].image ? (
+                  <Image
+                    src={imgPath(profile.certifications[selected].image)}
+                    alt={profile.certifications[selected].name}
+                    fill
+                    style={{ objectFit: 'contain' }}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <span style={{ fontSize: '3rem', opacity: 0.2 }}>🏅</span>
+                  </div>
+                )}
               </div>
 
               <div style={{ padding: '1rem 1.25rem' }}>

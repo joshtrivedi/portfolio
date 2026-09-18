@@ -121,7 +121,7 @@ export default function Hero() {
                   display: 'inline-block',
                 }}
               />
-              Open to collaboration
+              Open to work: AI/ML/Research Engineer roles
             </span>
           </div>
 
@@ -146,9 +146,9 @@ export default function Hero() {
                 lineHeight: 1.4,
               }}
             >
-              <span className="gradient-text">AI Engineer</span>
+              <span className="gradient-text">CTO</span>
               <span style={{ color: '#475569' }}> & </span>
-              <span style={{ color: '#e2e8f0' }}>Full-Stack Developer</span>
+              <span style={{ color: '#e2e8f0' }}>Co-Founder</span>
             </p>
           </div>
 
@@ -161,12 +161,11 @@ export default function Hero() {
               maxWidth: 480,
             }}
           >
-            Co-Founder & CTO at{' '}
-            <span style={{ color: '#16e0bd', fontWeight: 600 }}>Predeeption</span> — building
-            agentic AI systems, diffusion models, and production-grade full-stack applications
-            backed by{' '}
-            <span style={{ color: '#94a3b8', fontWeight: 500 }}>Inria</span> &{' '}
-            <span style={{ color: '#94a3b8', fontWeight: 500 }}>Scaleway</span>.
+            CTO & Co-Founder at{' '}
+            <span style={{ color: '#16e0bd', fontWeight: 600 }}>Predeeption</span>, building a
+            production LLM system with Augmented RAG for EV battery analytics, incubated by{' '}
+            <span style={{ color: '#94a3b8', fontWeight: 500 }}>Inria Startup Studio</span> with{' '}
+            <span style={{ color: '#94a3b8', fontWeight: 500 }}>CNRS</span> partnership.
           </p>
 
           {/* Stats row */}
@@ -174,7 +173,7 @@ export default function Hero() {
             {[
               { value: '5+', label: 'Years Exp.' },
               { value: '#433', label: 'Google Hashcode' },
-              { value: '27+', label: 'Certifications' },
+              { value: 'Top 10%', label: 'Kaggle CryoET' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div
